@@ -1,5 +1,5 @@
 const express = require('express');
-  
+require("dotenv").config(); 
 const app = express();
 const PORT = 3000;
   
@@ -17,7 +17,7 @@ const ngrok = require('ngrok');
         {
             proto: 'http', // http|tcp|tls, defaults to http
             addr: 8000, // port or network address, defaults to 80
-            authtoken: '2KDznS6M2OIUiVCOmpz69kG19Hx_4adr25MU4ps6PYpXt8VkA',
+            authtoken: process.env.AUTHTOKEN,
           }
     );
     console.log("url", url)
