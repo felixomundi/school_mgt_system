@@ -1,0 +1,30 @@
+{% extends 'main.html' %}
+
+{% block container %}
+
+<div class="row align-items-center justify-content-center">
+  
+    <div class="col-lg-8">
+        
+            <div class="text-center">
+                <h1 class="h4 text-gray-900 mb-4">Add New Student</h1>
+            </div>
+            <form method="post" action="{% url "add_student" %}">
+                {% csrf_token %}
+               <div class="mb-2">
+                {{ form }}
+               </div>
+                    
+                <button type="submit" class="btn btn-primary btn-user btn-block">
+                    Register New Student
+                </button>               
+               
+            </form>
+       
+    </div>
+</div>
+{% endblock container %}
+{% block scripts %}
+
+
+{% endblock scripts %}

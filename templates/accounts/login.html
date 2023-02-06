@@ -1,0 +1,29 @@
+
+{% extends 'accounts/base.html' %}
+{% block content %}
+    <div class='container-fluid'>  
+<div class="row d-flex justify-content-center align-items-center py-4 position-relative">   
+    <div class="col-md-4">    
+    </div>         
+    <div class="col-md-8">
+    <div class="colm-form">
+    <div class="form-container">
+    
+<form method='POST'autocomplete='false'>
+     {% csrf_token %}
+{% for message in messages %}
+   <p class="text-danger">{{ message}}</p> 
+{% endfor %} 
+     <input type="email" name="email" placeholder="Enter your email address"  class="form-control" required="true" id="id_email">
+     <input type="password" name="password" placeholder="Enter your Password"  class="form-control" required="true" id="id_password">
+       
+    <button type="submit" class="btn-login">Login</button>
+    <a  href="{% url 'reset_password' %}" style="text-decoration: none;">Forgotten password?</a>
+    <a href="/" style="text-decoration: none;" class="btn btn-warning">Home</a>
+</form>
+    </div>
+    </div>
+    </div>
+    </div>
+
+{% endblock content %}

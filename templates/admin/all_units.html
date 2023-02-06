@@ -1,0 +1,67 @@
+{% extends 'main.html' %}
+
+{% block container %}
+<div class="container-fluid">
+    
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-2 text-gray-800">All Units</h1>
+                    
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <a href="/add_unit" class="m-0 font-weight-bold btn btn-primary">Add New Unit</a>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <td>#</td>
+                                            <th>Name</th>
+                                            <td>Course</td>
+                                            <td>Staff</td>
+                                            <th>Created At</th>
+                                            <th>Updated At</th>                                           
+                                            <th>Edit</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <td>#</td>
+                                            <th>Name</th>
+                                            <td>Course</td>
+                                            <td>Staff</td>
+                                            <th>Created At</th>
+                                            <th>Updated At</th>                                           
+                                            <th>Edit</th>
+                                        </tr>
+                                    </tfoot>
+                                   <tbody>
+                                    {% if units %}
+                                    {% for unit in units   %}
+                                    <tr>
+                                       
+                                        <td>{{forloop.counter}}</td>
+                                        <td>{{unit.name}}</td>
+                                        <td>{{unit.course.name}}</td>
+                                        <td>{{unit.staff.user.email}}</td>
+                                        <td>{{ unit.created_at }}</td>
+                                        <td>{{unit.updated_at}}</td>
+                                        <td><a href="/edit_unit/{{unit.id}}" class="btn btn-primary">Edit</a></td>
+                                
+                                    </tr>
+                                    {% endfor %}
+                                        {% else %}
+                                        <tr>No unit has been added</tr>
+                                    {% endif %}
+                                   </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+</div>
+
+{% endblock container %}
+
+

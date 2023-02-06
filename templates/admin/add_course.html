@@ -1,0 +1,35 @@
+{% extends 'main.html' %}
+
+{% block container %}
+
+<div class="row align-items-center justify-content-center">
+  
+    <div class="col-lg-8">
+        
+            <div class="text-center">
+                <h1 class="h4 text-gray-900 mb-4">Add New Course</h1>
+            </div>
+            <form method="POST" action="{% url "add_course" %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    
+                    <input type="text" name="name" class="form-control"
+                    required
+                        placeholder="Name of Course">
+                   </div>
+
+                    {% for error in form.name.errors %}
+                 <p class="text-danger">   {{ error }}</p>
+                    {% endfor %}
+             
+                <button type="submit" class="btn btn-primary btn-user btn-block">
+                    Add New Course
+                </button>               
+               
+            </form>
+       
+    </div>
+</div>
+{% endblock container %}
+
+

@@ -1,0 +1,55 @@
+{% extends 'main.html' %}
+
+{% block container %}
+
+<div class="row align-items-center justify-content-center">
+  
+    <div class="col-lg-8">
+        
+            <div class="text-center">
+                <h1 class="h4 text-gray-900 mb-4">Add New Course</h1>
+            </div>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    {{ form.course.label }}
+                   {{ form.course }}
+                   </div>
+
+<div class="form-group">
+    {{ form.name.label }}
+{{ form.name }}
+    {% for error in form.name.errors %}
+    <p class="text-danger">   {{ error }}</p>
+       {% endfor %}
+</div>
+
+<div class="form-group">
+    {{ form.staff.label }}
+    {{ form.staff }}
+</div>
+         
+             
+                <button type="submit" class="btn btn-primary btn-user btn-block">
+                    Add New Course
+                </button>               
+               
+            </form>
+       
+    </div>
+</div>
+{% endblock container %}
+
+
+{% block scripts %}
+<script type='text/javascript'>
+    var form_fields = document.getElementsByTagName("select");
+    
+    
+    for (var field in form_fields) {
+        form_fields[field].className += ' form-control'
+    }
+    
+    </script>
+{% endblock scripts %}
+

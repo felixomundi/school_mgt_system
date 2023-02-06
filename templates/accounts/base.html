@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% comment %} <title>Auth system using django</title> {% endcomment %}
+    
+     <link href="{% static 'css/sb-admin-2.min.css' %}" rel="stylesheet"> 
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+   
+
+</head>
+<body>
+    
+{% block content  %}
+
+{% endblock content %}
+
+</body>
+ <script src="{% static 'vendor/jquery.min.js' %}"></script>
+<script src="{% static 'vendor/js/bootstrap.bundle.js' %}"></script> 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.all.min.js"></script>
+    
+{% block scripts %} {% endblock scripts %}
+</html>

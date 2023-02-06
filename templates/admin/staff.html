@@ -1,0 +1,68 @@
+{% extends 'main.html' %}
+
+{% block container %}
+<div class="container-fluid">
+    
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-2 text-gray-800">All Staff</h1>
+                    
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <a href="/add_staff" class="m-0 font-weight-bold btn btn-primary">Add New Staff</a>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <td>#</td>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            
+                                            <th>Created At</th>
+                                            <th>Updated At</th>                                           
+                                            <th>Edit</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <td>#</td>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            
+                                            <th>Created At</th>
+                                            <th>Updated At</th>                                           
+                                            <th>Edit</th>
+                                        </tr>
+                                    </tfoot>
+                                   <tbody>
+                                    {% if staffs %}
+                                    {% for staff in staffs   %}
+                                    <tr>
+                                       
+                                        <td>{{forloop.counter}}</td>
+                                        <td>{{staff.user.first_name}} {{ staff.user.last_name}}</td> 
+                                        <td>{{staff.user.email}}</td>                                        
+                                        <td>{{ staff.created_at }}</td>
+                                        <td>{{staff.updated_at}}</td>
+                                        <td><a href="#" class="btn btn-primary">Edit</a></td>
+                                
+                                    </tr>
+                                    {% endfor %}
+                                        {% else %}
+                                       <tr class="w-100">
+                                        <p class="text-danger">No students has been added</p>
+                                       </tr>
+                                    {% endif %}
+                                   </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+</div>
+
+{% endblock container %}
+
+

@@ -1,0 +1,49 @@
+
+{% extends 'accounts/base.html' %}
+{% block content %}
+<div class="container-fluid">
+<div class="row d-flex justify-content-center align-items-center py-4 position-relative">
+<div class='col-md-4'></div>            
+<div class="col-md-8">
+<div class="colm-form">
+<div class="form-container">
+<form method='POST'>
+     {% csrf_token %}
+     {{ form.first_name }}
+     {% if form.first_name.errors %} <p class='text-danger fw-bold-400'>{{ form.first_name.errors.as_text }}</p> {% endif %}
+
+     {{ form.last_name }}
+     {% if form.last_name.errors %} <p class='text-danger fw-bold-400'>{{ form.last_name.errors.as_text }}</p> {% endif %}
+
+      {{ form.email }}
+      {% if form.email.errors %} <p class='text-danger fw-bold-400'>{{ form.email.errors.as_text }}</p> {% endif %}
+
+ {{ form.password1 }}
+ {% if form.password1.errors %} <p class='text-danger fw-bold-400'>{{ form.password1.errors.as_text }}</p> {% endif %}
+ {{ form.password2 }}
+ {% if form.password2.errors %} <p class='text-danger fw-bold-400'>{{ form.password2.errors.as_text }}</p> {% endif %}
+<button class="btn-login" type='submit'>Create New Account</button>
+<a href="{% url 'reset_password' %}" style="text-decoration: none;">Forgotten password?</a>
+<a href="/" style="text-decoration: none;" class="btn btn-warning">Home</a>
+<a href="{% url 'login' %}" style="text-decoration: none;" class="sub btn-new">Already have account? Login</a>
+</form>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+ <script type='text/javascript'>
+var form_fields = document.getElementsByTagName("input");
+
+form_fields[4].placeholder = 'Password'
+form_fields[5].placeholder = 'Confirm Password'
+
+for (var field in form_fields) {
+    form_fields[field].className += ' form-control'
+}
+
+</script>
+
+
+{% endblock content %}

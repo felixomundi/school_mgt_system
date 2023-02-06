@@ -1,0 +1,58 @@
+# echo "# company" >> README.md
+# git init
+# git add README.md
+# git commit -m "first commit"
+# git branch -M main
+# git remote add origin https://github.com/fong254/company.git
+# git push -u origin main
+
+# git remote add origin https://github.com/fong254/company.git
+# git branch -M main
+# git push -u origin main
+
+
+
+student progress info. system
+
+# student info
+# student attendance
+# attendance reports
+# student grades
+# average grades, transcripts 
+
+# student progress
+# set goals and tracking progress
+# sms
+
+# coding ex Create Student Model | Register Django Model | Django Projects | in Hindi
+
+
+
+# Python Django Student Management System Part 11 | Session Year and Staff Take Attendance
+# Super Coders
+
+authtoken = 2KDznS6M2OIUiVCOmpz69kG19Hx_4adr25MU4ps6PYpXt8VkA
+
+['localhost','127.0.0.1','3124-41-209-51-2.ngrok.io']
+
+login as student
+email student@gmail.com
+password So123456
+
+login as lecturer
+
+email staff@gmail.com
+password Lo123456
+
+login as Admin/HOD
+
+email admin@gmail.com
+password Ho123456
+
+python manage.py makemigrations && python manage.py migrate && python manage.py runserver
+
+
+# dbsqlite on delete_functions
+
+set_default =related_name =product, null=True, blank=True,default=1
+cascade delete everything that's relared to it

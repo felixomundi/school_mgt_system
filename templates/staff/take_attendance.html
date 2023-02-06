@@ -1,0 +1,73 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block container %}
+
+
+<div class="row justify-content-center">
+
+   
+    <div class="col-lg-8">
+
+        <!-- Dropdown Card Example -->
+        <div class="card shadow mb-4">
+            <!-- Card Header - Dropdown -->
+            <div
+                class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Take Attendance</h6>
+                
+            </div>
+            <!-- Card Body -->
+            <div class="card-body p-5">
+              
+               <form method="POST" id="postForm">
+               {% csrf_token %}
+                <div class="form-group">
+                    <label for="unit">Unit</label>
+                    <select  class="form-control" name="unit" required id="unit">
+                                                
+                        <option value="">--------</option>
+                        {% if units %}
+                        {% for unit in units %}
+                        <option value="{{unit.pk}}">{{unit.name}}</option>
+                        {% endfor %}
+                        {% else %}
+                        <option value="">You currently dont have assigned units</option>
+                        {% endif %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="session">Session</label>
+                    <select  class="form-control" name="session" required id="session">
+                        <option value="">--------</option>
+                        {% if sessions %}
+                        {% for session in sessions %}                       
+                        <option value="{{session.pk}}">{{session.name}}</option>
+                        {% endfor %}
+                        {% else %}
+                        <option value="">There is no active sessions</option>
+                        {% endif %}
+                    </select>
+                </div>
+               
+                <button type="submit" id="fetch-student" class="btn btn-primary btn-user btn-block">
+                    Fetch Student
+                </button>    
+
+                     <div id="append-data" class="form-group mt-4">
+
+                     </div>      
+            </form>
+             
+            </div>
+        </div>
+
+      
+
+    </div>
+
+</div>
+{% endblock container %}
+
+{% block scripts %}
+<script src="{% static "js/students.js" %}"> </script>
+{% endblock scripts  %}

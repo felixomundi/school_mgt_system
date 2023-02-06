@@ -1,0 +1,200 @@
+{% block content %}
+
+ <!-- Sidebar -->
+ <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0">
+{% if user.is_authenticated  %}
+{% if user.role == "is_student" %}
+
+<!-- Student - Dashboard -->
+<li class="nav-item active">
+    <a class="nav-link" href="/">
+        <i class="fas fa-fw fa-tachometer-alt"></i>
+        <span>Student Dashboard</span></a>
+</li>
+{% elif user.role == "is_parent" %}
+<!-- Parent- Dashboard -->
+<li class="nav-item active">
+    <a class="nav-link" href="/">
+        <i class="fas fa-fw fa-tachometer-alt"></i>
+        <span>Parent Dashboard</span></a>
+</li>
+{% elif user.role == "is_lecturer"%}
+<!-- Lecturer- Dashboard -->
+<li class="nav-item active">
+    <a class="nav-link" href="/">
+        <i class="fas fa-fw fa-tachometer-alt"></i>
+        <span>Lecturer Dashboard</span></a>
+</li>
+
+<!-- Nav Item - Pages Collapse Menu -->
+<li class="nav-item active">
+    <a class="nav-link" href="/units">
+        <i class="fas fa-fw fa-cog"></i>
+        <span>Units</span>
+    </a>
+  
+</li>
+  <!-- Nav Item - Pages Collapse Menu -->
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#gradeTab"
+        aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fas fa-fw fa-cog"></i>
+        <span>Grades</span>
+    </a>
+    <div id="gradeTab" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="">Add Marks</a>
+            <a class="collapse-item" href="">Manage Marks</a>
+        </div>
+    </div>
+</li>
+
+
+  <!-- Nav Item - Pages Collapse Menu -->
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#attendanceTab"
+        aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fas fa-fw fa-cog"></i>
+        <span>Attendance</span>
+    </a>
+    <div id="attendanceTab" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="{% url "take_attendance" %}">Take Attendance</a>
+            <a class="collapse-item" href="/update_attendance">Update Attendance</a>
+        </div>
+    </div>
+</li>
+
+<!-- Lecturer- Dashboard -->
+<li class="nav-item active">
+    <a class="nav-link" href="">
+        <i class="fas fa-fw fa-tachometer-alt"></i>
+        <span>Students</span></a>
+</li>
+
+
+
+
+{% elif user.is_superuser and user.role == "is_admin" %}
+<!-- Admin- Dashboard -->
+<li class="nav-item active">
+    <a class="nav-link" href="/">
+        <i class="fas fa-fw fa-tachometer-alt"></i>
+        <span>Admin Dashboard</span></a>
+</li>
+  <!-- Nav Item - Pages Collapse Menu -->
+  <li class="nav-item active">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#studentTab"
+        aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fas fa-fw fa-cog"></i>
+        <span>Students</span>
+    </a>
+    <div id="studentTab" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+        
+            <a class="collapse-item" href="/add_student">Add Student</a>
+            <a class="collapse-item" href="/students">Manage Students</a>
+        </div>
+    </div>
+</li>
+  <!-- Nav Item - Pages Collapse Menu -->
+  <li class="nav-item active">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#courseTab"
+        aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fas fa-fw fa-cog"></i>
+        <span>Courses</span>
+    </a>
+    <div id="courseTab" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="/add_course">Add Course</a>
+            <a class="collapse-item" href="/courses" >Manage Courses</a>
+        </div>
+    </div>
+</li>
+
+ <!-- Nav Item - Pages Collapse Menu -->
+ <li class="nav-item active">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#staffTab"
+        aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fas fa-fw fa-cog"></i>
+        <span>Staff</span>
+    </a>
+    <div id="staffTab" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="/add_staff">Add Staff</a>
+            <a class="collapse-item" href="/staff" >Manage Staff</a>
+        </div>
+    </div>
+</li>
+
+
+ <!-- Nav Item - Pages Collapse Menu -->
+ <li class="nav-item active">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#unitsTab"
+        aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fas fa-fw fa-cog"></i>
+        <span>Units</span>
+    </a>
+    <div id="unitsTab" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="/add_unit">Add Unit</a>
+            <a class="collapse-item" href="/admin_units" >Manage Units</a>
+        </div>
+    </div>
+</li>
+
+<!-- Nav Item - Pages Collapse Menu -->
+<li class="nav-item active">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#sessionsTab"
+        aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fas fa-fw fa-cog"></i>
+        <span>Sessions</span>
+    </a>
+    <div id="sessionsTab" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="/add_session">Add Session</a>
+            <a class="collapse-item" href="/admin_sessions" >Manage Sessions</a>
+        </div>
+    </div>
+</li>
+
+{% endif %}
+
+
+<li class="nav-item">
+    <a class="nav-link text-light" href="/logout">
+        <i class="fa fa-power-off"></i>
+        <span>Logout</span></a>
+</li>
+
+{% else %}
+ 
+<li class="nav-item">
+    <a class="nav-link" href="/login">
+        <i class="fas fa-fw fa-table"></i>
+        <span>Login</span></a>
+</li>
+
+{% endif %}
+
+
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block">
+
+    <!-- Sidebar Toggler (Sidebar) -->
+    <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
+
+ 
+
+</ul>
+<!-- End of Sidebar -->
+
+{% endblock content %}
+
+
+

@@ -1,0 +1,65 @@
+{% extends 'main.html' %}
+
+{% block container %}
+<div class="container-fluid">
+    
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-2 text-gray-800">All Current Sessions</h1>
+                    
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <a href="/add_session" class="m-0 font-weight-bold btn btn-primary">Add New Session</a>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <td>#</td>
+                                            <th>Name</th>                                           
+                                            <th>Start</th>
+                                            <th>End</th>   
+                                                                            
+                                            <th>Edit</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <td>#</td>
+                                            <th>Name</th>                                           
+                                            <th>Start</th>
+                                            <th>End</th>  
+                                                                                     
+                                            <th>Edit</th>
+                                        </tr>
+                                    </tfoot>
+                                   <tbody>
+                                    {% if sessions %}
+                                    {% for session in sessions   %}
+                                    <tr>
+                                       
+                                        <td>{{forloop.counter}}</td>
+                                        <td>{{session.name}}</td>
+                                        <td>{{session.start}}</td>
+                                        <td>{{session.end}}</td>
+                                        <td><a href="/edit_session/{{ session.pk }}" class="btn btn-primary">Edit</a></td>
+                                
+                                    </tr>
+                                    {% endfor %}
+                                        {% else %}
+                                       <tr class="w-100">
+                                        <p class="text-danger">No session exist</p>
+                                       </tr>
+                                    {% endif %}
+                                   </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+</div>
+
+{% endblock container %}
+
+

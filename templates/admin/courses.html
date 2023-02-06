@@ -1,0 +1,61 @@
+{% extends 'main.html' %}
+
+{% block container %}
+<div class="container-fluid">
+    
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-2 text-gray-800">All Courses</h1>
+                    
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <a href="/add_course" class="m-0 font-weight-bold btn btn-primary">Add New Course</a>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <td>#</td>
+                                            <th>Name</th>
+                                            <th>Created At</th>
+                                            <th>Updated At</th>                                           
+                                            <th>Edit</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <td>#</td>
+                                            <th>Name</th>
+                                            <th>Created At</th>
+                                            <th>Updated At</th>                                           
+                                            <th>Edit</th>
+                                        </tr>
+                                    </tfoot>
+                                   <tbody>
+                                    {% if courses %}
+                                    {% for course in courses   %}
+                                    <tr>
+                                       
+                                        <td>{{forloop.counter}}</td>
+                                        <td>{{course.name}}</td>
+                                        <td>{{ course.created_at }}</td>
+                                        <td>{{course.updated_at}}</td>
+                                        <td><a href="/edit_course/{{course.id}}" class="btn btn-primary">Edit</a></td>
+                                
+                                    </tr>
+                                    {% endfor %}
+                                        {% else %}
+                                        <tr>No course has been added</tr>
+                                    {% endif %}
+                                   </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+</div>
+
+{% endblock container %}
+
+
