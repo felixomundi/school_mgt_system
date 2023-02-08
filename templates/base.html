@@ -11,7 +11,7 @@
 <meta content="" name="description">
 <meta content="no-referrer-when-downgrade" name="referrer">
 <!-- Favicon -->
-<link href="img/favicon.ico" rel="icon">
+{% comment %} <link href="{% static "img/favicon.png" %}" rel="icon"> {% endcomment %}
 
 <link href="{% static "vendor/fontawesome-free/css/all.min.css" %}" rel="stylesheet" type="text/css">
 <link
@@ -68,12 +68,13 @@ const csrftoken = getCookie('csrftoken');
   <!-- Custom scripts for all pages-->
   <script src="{% static "js/sb-admin-2.min.js" %}"></script>
 
-  {% comment %} <!-- Page level plugins -->
+
   <script src="{% static "vendor/chart.js/Chart.min.js" %}"></script>
 
   <!-- Page level custom scripts -->
   <script src="{% static "js/demo/chart-area-demo.js" %}"></script>
-  <script src="{% static "js/demo/chart-pie-demo.js" %}"></script> {% endcomment %}
+
+ {% comment %} <script src="{% static "js/demo/chart-pie-demo.js" %}"></script>  {% endcomment %}
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
       

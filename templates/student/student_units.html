@@ -1,0 +1,54 @@
+{% extends 'main.html' %}
+
+{% block container %}
+<div class="container-fluid">
+    
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-2 text-gray-800">All Units</h1>
+                    
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">                       
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <td>#</td>
+                                            <th>Unit Name</th>                                            
+                                          
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <td>#</td>
+                                            <th>Unit Name</th>
+                                            
+                                        </tr>
+                                    </tfoot>
+                                   <tbody>
+                                    {% if units %}
+                                    {% for unit in units   %}
+                                    <tr>
+                                       
+                                        <td>{{forloop.counter}}</td>
+                                        <td> {{ unit.name}}</td> 
+                                        
+                                
+                                    </tr>
+                                    {% endfor %}
+                                        {% else %}
+                                       <tr class="w-100">
+                                        <p class="text-danger">No units for your course exist</p>
+                                       </tr>
+                                    {% endif %}
+                                   </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+</div>
+
+{% endblock container %}
+
+

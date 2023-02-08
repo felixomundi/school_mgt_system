@@ -1,10 +1,7 @@
 from django.db import models
-# from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.models import AbstractBaseUser,BaseUserManager,PermissionsMixin
-import uuid
+from decimal import Decimal
 
-from django.db.models.signals import post_save
-from django.dispatch import receiver
 
 gender = [
     ("male","male"),
@@ -209,4 +206,22 @@ class AttendanceReport(models.Model):
         return self.student.user.email
         
             
-            
+class StudentResult(models.Model):
+    id = models.AutoField(primary_key=True)
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    unit = models.ForeignKey(Unit, on_delete=models.CASCADE)
+    unit_exam_marks = models.FloatField(default=0)
+    unit_assignment_marks = models.FloatField(default=0)
+    total_marks = models.FloatField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    def __str__(self):
+        return self.student.user.email 
+    
+    @property
+    def total(self):
+        return self.unit_assignment_marks + self.unit_exam_marks
+        
+  
+             

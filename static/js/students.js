@@ -14,14 +14,18 @@ productForm.addEventListener('submit', async function getStudents(e) {
         // console.log(json_data);
         //Displaying Attendance Date Input and Students Attendance
         var div_data="<div class='form-group'><label>Attendance Date: </label> <input type='date' required='true' name='attendance_date' id='attendance_date' class='form-control' /></div>"
-        div_data+="<div class='form-group'><div class='row'>"
-
+        // div_data+="<div class='form-group'><div class='row'>"
+        // div_data += "<div class='form-group'><div class='row'><div class='col-lg-12'><select id='mySelect' class='form-control' onchange='myFunction()'>"
+        div_data += "<div class='form-group'><div class='row'><div class='col-lg-12'><select id='mySelect' class='form-control'> <option value=''>Select Student</option>"
+       
         for(key in json_data)
         {
-            div_data+="<div class='col-lg-2'><div class='form-check'><input type='checkbox' checked='checked'   name='student_data[]' value='"+ json_data[key]['id'] +"' />  <label class='form-check-label'>"+ json_data[key]['name']+" </label></div></div> ";
-
+            // div_data+="<div class='col-lg-12'><input type='radio' onchange='onStudentChange(e)' name='student' class='mb-2' id='"+ json_data[key]['id'] +"' value='"+ json_data[key]['id']+"'>"+ json_data[key]['name']+"</input></div> ";
+            div_data += "<option value='"+ json_data[key]['id'] +"'>"+ json_data[key]['name'] +"</option>"
+            
         }
-        div_data+="</div></div>";
+        div_data+="</select></div></div></div>";
+        // div_data+="</div></div>";
         div_data+="<div class='form-group'>";
         div_data+="<button id='save_attendance' class='btn btn-success' type='button'>Save Attendance Data</button>";
         div_data+="</div>";
@@ -33,21 +37,14 @@ productForm.addEventListener('submit', async function getStudents(e) {
         console.log(error);
     };
             
-            var saveButton = document.getElementById("save_attendance");      
+        var saveButton = document.getElementById("save_attendance");      
         saveButton.addEventListener("click", async function () { 
-        $(this).attr("disabled", "disabled")
-        $(this).text("Saving Attendance Data...")
+            $(this).attr("disabled", "disabled");
+            $(this).text("Saving Attendance Data...");
             var unit = document.getElementById("unit").value;                
             var session = document.getElementById("session").value;
             var attendance = document.getElementById("attendance_date").value;
-            var student_data = $("input[name='student_data[]'").map(function () {
-                    if ($(this).is(":checked")) {
-                        return { "id": $(this).val(), "status": 1 }; // Getting ID and Value of Students
-                    }
-                    else {
-                        return { "id": $(this).val(), "status": 0 }; // Getting ID and Value of Students
-                    }
-            }).get();
+            
           
             if (!attendance) {
                 saveButton.removeAttribute("disabled");
@@ -55,13 +52,18 @@ productForm.addEventListener('submit', async function getStudents(e) {
                     alert("Choose Attendance Date")
                     return attendance;
                 }
-              
-                
+                var student_data = document.getElementById("mySelect").value;
+            if (!student_data) {
+                saveButton.removeAttribute("disabled");
+                $(this).text("Save Attendance Data");
+                    alert("Select student");
+                    return student_data;
+                }
+                            
             var data = {
                 unit, session, attendance, student_data    
                     }    
                     let body = JSON.stringify(data);
-                console.log(body);
                 var config = {
                     headers: {
                         'Content-Type': 'application/json',
@@ -72,14 +74,15 @@ productForm.addEventListener('submit', async function getStudents(e) {
                 try { 
                     const response = await axios.post("/save_attendance_data", body, config);
                     alert(response.data);
-                    location.reload();
+                     location.reload();
 
                 }
                 catch (error) {
                     alert("Error no student to save to attendance.");
-                    location.reload();
+                     location.reload();
                 }
         
         
         })
 });
+

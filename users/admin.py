@@ -1,5 +1,5 @@
 from django.contrib import admin
-from users.models import User,Course,Session,Student ,Staff,Unit,Attendance,AttendanceReport
+from users.models import User,Course,Session,Student ,Staff,Unit,Attendance,AttendanceReport,StudentResult
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin 
 
 
@@ -78,3 +78,9 @@ class AttendanceReportAdmin(admin.ModelAdmin):
     list_display = ("attendance",'student',"created_at",'updated_at')  
     ordering = ('-pk',)
     search_fields = ("attendance",'student',"created_at",'updated_at')                
+    
+@admin.register(StudentResult)
+class StudentResultAdmin(admin.ModelAdmin):
+    list_display = ("student","unit","unit_exam_marks","unit_assignment_marks","total_marks","created_at","updated_at")
+    ordering = ["-pk"]
+    search_fields = ["student","unit","unit_exam_marks","unit_assignment_marks","created_at","updated_at"]    

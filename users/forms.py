@@ -1,6 +1,6 @@
 from django import forms
 from .models import *
-from django.contrib.auth import authenticate
+
 ROLES = [
     ('is_student', 'Student'),
     # ('is_parent', 'Parent'),
@@ -29,15 +29,14 @@ staff_list = []
 for item in staffs:
     single_staff = (item.id, str(item.gender))
     staff_list.append(single_staff)
-try:
-    sessions = Course.objects.all()
-    session_list = []
-    for session_year in sessions:
-        single_session_year = (session_year.id, str(session_year.name))
-        session_list.append(single_session_year)
+
+sessions = Session.objects.all()
+session_list = []
+for session_year in sessions:
+    single_session_year = (session_year.id, str(session_year.name))
+    session_list.append(single_session_year)
         
-except:
-    session_list = []   
+   
 
 
 class UserRegistrationForm(forms.Form):

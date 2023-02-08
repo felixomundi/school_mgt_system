@@ -6,25 +6,31 @@
     <!-- Divider -->
     <hr class="sidebar-divider my-0">
 {% if user.is_authenticated  %}
-{% if user.role == "is_student" %}
+{% if user.is_student and user.role == "is_student" %}
 
 <!-- Student - Dashboard -->
 <li class="nav-item active">
-    <a class="nav-link" href="/">
+    <a class="nav-link" href="/student_home">
         <i class="fas fa-fw fa-tachometer-alt"></i>
         <span>Student Dashboard</span></a>
 </li>
-{% elif user.role == "is_parent" %}
-<!-- Parent- Dashboard -->
+
 <li class="nav-item active">
-    <a class="nav-link" href="/">
-        <i class="fas fa-fw fa-tachometer-alt"></i>
-        <span>Parent Dashboard</span></a>
+    <a class="nav-link" href="/view_result">
+        <i class="fas fa-list"></i>
+        <span>View Result</span></a>
 </li>
-{% elif user.role == "is_lecturer"%}
+
+
+<li class="nav-item active">
+    <a class="nav-link" href="/student_units">
+        <i class="fas fa-list"></i>
+        <span>View Units</span></a>
+</li>
+{% elif user.role == "is_lecturer" and user.is_lecturer %}
 <!-- Lecturer- Dashboard -->
 <li class="nav-item active">
-    <a class="nav-link" href="/">
+    <a class="nav-link" href="/staff_home">
         <i class="fas fa-fw fa-tachometer-alt"></i>
         <span>Lecturer Dashboard</span></a>
 </li>
@@ -38,23 +44,17 @@
   
 </li>
   <!-- Nav Item - Pages Collapse Menu -->
-  <li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#gradeTab"
-        aria-expanded="true" aria-controls="collapseTwo">
-        <i class="fas fa-fw fa-cog"></i>
-        <span>Grades</span>
+  <li class="nav-item active">
+    <a class="nav-link" href="/add_marks">
+        <i class="fas fa-list"></i>
+        <span>Add or Update Marks</span>
     </a>
-    <div id="gradeTab" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="">Add Marks</a>
-            <a class="collapse-item" href="">Manage Marks</a>
-        </div>
-    </div>
+   
 </li>
 
 
   <!-- Nav Item - Pages Collapse Menu -->
-  <li class="nav-item">
+  <li class="nav-item active">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#attendanceTab"
         aria-expanded="true" aria-controls="collapseTwo">
         <i class="fas fa-fw fa-cog"></i>
@@ -63,25 +63,16 @@
     <div id="attendanceTab" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="{% url "take_attendance" %}">Take Attendance</a>
-            <a class="collapse-item" href="/update_attendance">Update Attendance</a>
+            {% comment %} <a class="collapse-item" href="/update_attendance">Update Attendance</a> {% endcomment %}
         </div>
     </div>
 </li>
-
-<!-- Lecturer- Dashboard -->
-<li class="nav-item active">
-    <a class="nav-link" href="">
-        <i class="fas fa-fw fa-tachometer-alt"></i>
-        <span>Students</span></a>
-</li>
-
-
 
 
 {% elif user.is_superuser and user.role == "is_admin" %}
 <!-- Admin- Dashboard -->
 <li class="nav-item active">
-    <a class="nav-link" href="/">
+    <a class="nav-link" href="/home">
         <i class="fas fa-fw fa-tachometer-alt"></i>
         <span>Admin Dashboard</span></a>
 </li>
@@ -164,10 +155,10 @@
 {% endif %}
 
 
-<li class="nav-item">
+<li class="nav-item active">
     <a class="nav-link text-light" href="/logout">
         <i class="fa fa-power-off"></i>
-        <span>Logout</span></a>
+        <span class='outline-none'>Logout</span></a>
 </li>
 
 {% else %}
