@@ -5,11 +5,14 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import *
 from .decorators import user_is_superuser
+import json
+from django.http import HttpResponse
 
 @login_required(login_url="/")
 @user_is_superuser
 def home(request):
     staffs = Staff.objects.all().count()
+    superusers = User.objects.filter(is_superuser = True).count()
     students = Student.objects.all().count()
     units = Unit.objects.all().count()
     courses = Course.objects.all().count()
@@ -21,7 +24,8 @@ def home(request):
                             "students":students,
                             "units":units,
                             "courses":courses,
-                            "users":users,  
+                            "users":users, 
+                            "superusers":superusers,  
                             })
 
     
@@ -47,6 +51,14 @@ def courses(request):
     courses =Course.objects.all().order_by("-created_at")
     return render(request,"admin/courses.html", context={"courses":courses})
 
+
+@login_required(login_url="/")
+@user_is_superuser
+def delete_course(request,pk):        
+    course = Course.objects.get(id = pk)
+    course.delete()
+    messages.success(request, "Course Deleted successfully")
+    return redirect("courses")
     
 @login_required(login_url="/")
 @user_is_superuser
@@ -102,7 +114,7 @@ def add_student(request):
                 user = User.objects.create_user(email=email, first_name=first_name, last_name=last_name, role=role, password=password, is_student=is_student)
                 
                 
-                student = Student.objects.create(user=user, course= course_obj, 
+                Student.objects.create(user=user, course= course_obj, 
                                                     session = session_year_obj,gender=gender, 
                                                     year_of_study=year_of_study)
                 
@@ -114,46 +126,19 @@ def add_student(request):
     else:
         form = UserRegistrationForm()    
     return render(request, "admin/add_student.html", context = {"form":form})
-   
-
     
-@login_required(login_url="/")
-@user_is_superuser
-def edit_student(request, pk):    
-    student = get_object_or_404(Student, id=pk)
-    form = EditStudentForm(instance=student)                                                               
+    
 
-    if request.method == "POST":
-        form = EditStudentForm(request.POST, instance= student)
-        if form.is_valid():          
-            
-            session_year_id = form.cleaned_data['session']
-            course_id = form.cleaned_data['course']
-            year_of_study = form.cleaned_data['year_of_study']
-            gender = form.cleaned_data['gender']
-            # course_obj = Course.objects.get(id=course_id)                    
-            session_year_obj = Session.objects.get(id=session_year_id)
-            
-            
-                 
-            new_student = Student.objects.get(id = student)
-            course =  Course.objects.get(id=course_id)   
-            new_student.course = course
-            new_student.session = session_year_obj
-            new_student.gender = gender
-            new_student.year_of_study = year_of_study
-            new_student.save()
-            
-            
-            messages.success(request, "Student updated Successfully!")
-            return redirect('/students')
-           
-        else:
-            return redirect('add_student')   
-    context={"form":form}     
-    return render(request, "admin/edit_student.html",context)   
-
- 
+@login_required(login_url="/")    
+@user_is_superuser    
+def delete_student(request, pk):
+    student = Student.objects.get(id = pk)
+    user = User.objects.get(email=student)
+    user.delete()    
+    messages.success(request, "Student Delete successfully")
+    return redirect("students")
+       
+    
     
 @login_required(login_url="/") 
 @user_is_superuser  
@@ -195,11 +180,15 @@ def add_staff(request):
     return render(request, "admin/add_staff.html", context={"form":form})
 
 
-    
-@login_required(login_url="/")
-@user_is_superuser
-def edit_staff(request):
-    return render(request, "admin/edit_staff.html")
+
+@login_required(login_url="/")    
+@user_is_superuser    
+def delete_staff(request, pk):
+    staff = Staff.objects.get(id = pk)
+    user = User.objects.get(email=staff)
+    user.delete()
+    messages.success(request, "Staff Deleted successfully")
+    return redirect("staff")
 
     
 @login_required(login_url="/")
@@ -238,6 +227,19 @@ def edit_unit(request, pk):
    
     return render(request ,"admin/add_unit.html", context={"form":form})
 
+
+    
+@login_required(login_url="/")
+@user_is_superuser
+def delete_unit(request,pk):        
+    unit = Unit.objects.get(id = pk)
+    unit.delete()
+    messages.success(request, "Unit Deleted successfully")
+    return redirect("admin_units")
+
+    
+    
+    
     
 @login_required(login_url="/")
 @user_is_superuser
@@ -259,6 +261,13 @@ def admin_sessions(request):
     sessions= Session.objects.all()
     return render(request, "admin/sessions.html",context={"sessions":sessions} )
 
+@login_required(login_url="/")
+@user_is_superuser
+def delete_session(request,pk):        
+    session = Session.objects.get(id = pk)
+    session.delete()
+    messages.success(request, "Session Deleted successfully")
+    return redirect("admin_sessions")
     
 @login_required(login_url="/")
 def edit_session(request,pk):
@@ -273,3 +282,24 @@ def edit_session(request,pk):
             return redirect ('/admin_sessions')
    
     return render(request,"admin/edit_session.html", context={"form":form})
+
+
+
+
+@login_required(login_url="/")
+@user_is_superuser
+def admin_profile(request):
+    user  = User.objects.filter(id = request.user.id).first()
+    return render(request, 'admin/admin_profile.html', context = {"user":user})
+
+@login_required(login_url="/")
+@user_is_superuser
+def admin_profile_update(request):
+    data = json.loads(request.body)
+    first_name = data['first_name']
+    last_name = data['last_name']
+    user = User.objects.get(id= request.user.id)
+    user.first_name = first_name
+    user.last_name = last_name
+    user.save()    
+    return HttpResponse("Ok")

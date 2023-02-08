@@ -1,5 +1,6 @@
 from django import forms
 from .models import *
+from django.contrib.auth import authenticate
 
 ROLES = [
     ('is_student', 'Student'),
@@ -91,35 +92,7 @@ class EditCourseForm(forms.ModelForm):
         model = Course
         fields= ('name',)    
         
-         
-class EditStudentForm(forms.ModelForm):
-    gender = forms.CharField(label="Gender", widget=forms.Select(choices=gender,attrs={'class': 'form-control'}),)
-    course = forms.ChoiceField(label="Course", choices=course_list, widget=forms.Select(attrs={"class":"form-control"}))
-    try:
-        sessions = Session.objects.all()
-        session_list = []
-        for session_year in sessions:
-            single_session_year = (session_year.id, str(session_year.name))
-            session_list.append(single_session_year)
-            
-    except:
-        session_list = []
-    session = forms.ChoiceField(label="Session", choices=session_list, widget=forms.Select(attrs={"class":"form-control"}))
-    year_of_study = forms.ChoiceField(label="Year of Study",
-                    choices = 
-                    [("I","I"),
-                    ("II","II"),
-                    ("III", "III"),
-                    ("IV", "IV"),
-                    ("V", "V")
-                ]
-                ,widget=forms.Select(attrs={"class":"form-control"}))
-    
-    class Meta:
-        model = Student
-        fields= ["gender", "course","session", "year_of_study",] 
-       
-    
+        
     
 class AddStaffForm(forms.Form):
     first_name = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','minlength':'3','maxlength':'15','placeholder':'First Name'}))

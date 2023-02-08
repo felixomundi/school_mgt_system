@@ -20,8 +20,8 @@
                                             <th>Name</th>                                           
                                             <th>Start</th>
                                             <th>End</th>   
-                                                                            
-                                            <th>Edit</th>
+                                            <th>Edit</th>                        
+                                            <th>Delete</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -29,9 +29,9 @@
                                             <td>#</td>
                                             <th>Name</th>                                           
                                             <th>Start</th>
-                                            <th>End</th>  
-                                                                                     
+                                            <th>End</th>                                                                                      
                                             <th>Edit</th>
+                                            <th>Delete</th>
                                         </tr>
                                     </tfoot>
                                    <tbody>
@@ -44,6 +44,7 @@
                                         <td>{{session.start}}</td>
                                         <td>{{session.end}}</td>
                                         <td><a href="/edit_session/{{ session.pk }}" class="btn btn-primary">Edit</a></td>
+                                        <td><a href="/delete_session/{{ session.pk }}" class="btn btn-danger">Delete</a></td>
                                 
                                     </tr>
                                     {% endfor %}

@@ -23,6 +23,7 @@
                                             <th>Created At</th>
                                             <th>Updated At</th>                                           
                                             <th>Edit</th>
+                                             <th>Delete</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -32,8 +33,9 @@
                                             <td>Course</td>
                                             <td>Staff</td>
                                             <th>Created At</th>
-                                            <th>Updated At</th>                                           
-                                            <th>Edit</th>
+                                            <th>Updated At</th> 
+                                             <th>Edit</th>                                                                                       
+                                            <th>Delete</th>
                                         </tr>
                                     </tfoot>
                                    <tbody>
@@ -48,6 +50,7 @@
                                         <td>{{ unit.created_at }}</td>
                                         <td>{{unit.updated_at}}</td>
                                         <td><a href="/edit_unit/{{unit.id}}" class="btn btn-primary">Edit</a></td>
+                                        <td><a href="/delete_unit/{{unit.id}}" class="btn btn-danger">Delete</a></td>
                                 
                                     </tr>
                                     {% endfor %}

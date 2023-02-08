@@ -22,7 +22,7 @@
                                             <th>Course</th>
                                             <th>Created At</th>
                                             <th>Updated At</th>                                           
-                                            <th>Edit</th>
+                                            <th>Delete</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -33,7 +33,7 @@
                                             <th>Course</th>
                                             <th>Created At</th>
                                             <th>Updated At</th>                                           
-                                            <th>Edit</th>
+                                            <th>Delete</th>
                                         </tr>
                                     </tfoot>
                                    <tbody>
@@ -47,7 +47,7 @@
                                         <td>{{student.course.name}}</td>
                                         <td>{{ student.created_at }}</td>
                                         <td>{{student.updated_at}}</td>
-                                        <td><a href="/edit_student/{{ student.pk }}" class="btn btn-primary">Edit</a></td>
+                                        <td><a href="/delete_student/{{ student.pk }}" class="btn btn-danger">Delete</a></td>
                                 
                                     </tr>
                                     {% endfor %}
