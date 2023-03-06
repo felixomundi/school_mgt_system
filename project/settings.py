@@ -19,8 +19,8 @@ SECRET_KEY = config('SECRET_KEY')
 
 DEBUG =config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['localhost','127.0.0.1','4fc2-41-209-51-2.ngrok.io']
-CSRF_TRUSTED_ORIGINS = ['https://4fc2-41-209-51-2.ngrok.io']
+ALLOWED_HOSTS = ['localhost','127.0.0.1','d987-102-222-144-210.ngrok.io']
+CSRF_TRUSTED_ORIGINS = ['https://d987-102-222-144-210.ngrok.io']
 
 
 # Application definition
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django_filters',
     'tinymce',    
     "users",
+    "twilio",
    
     
 ]

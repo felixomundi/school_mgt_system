@@ -13,5 +13,6 @@ email admin@gmail.com
 password Ho123456
 
 python manage.py makemigrations && python manage.py migrate && python manage.py runserver
-
+venv\scripts\activate
+venv\scripts\deactivate
 

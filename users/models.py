@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser,BaseUserManager,PermissionsMixin
-from decimal import Decimal
+from twilio.rest import Client
+from decouple import config
 
 
 gender = [
@@ -204,6 +205,18 @@ class AttendanceReport(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     def __str__(self):
         return self.student.user.email
+    def save(self,*args, **kwargs):        
+        account_sid = config('TWILIO_ACCOUNT_SID')    
+        auth_token = config('TWILIO_AUTH_TOKEN')
+        client = Client(account_sid, auth_token)
+        message = client.messages \
+                        .create(
+                            body=f"Your attendance for {self.attendance.attendance_date}  and {self.attendance.unit.name} was added successfully",
+                            from_='+12764004442',
+                            to=['+254745566505']
+                        )
+                
+        return super().save(*args, **kwargs)
         
             
 class StudentResult(models.Model):
@@ -222,6 +235,19 @@ class StudentResult(models.Model):
     @property
     def total(self):
         return self.unit_assignment_marks + self.unit_exam_marks
+    
+    def save(self,*args, **kwargs):        
+        account_sid = config('TWILIO_ACCOUNT_SID')    
+        auth_token = config('TWILIO_AUTH_TOKEN')
+        client = Client(account_sid, auth_token)
+        message = client.messages \
+                        .create(
+                            body=f"Your marks for {self.unit.name} was added successfully",
+                            from_='+12764004442',
+                            to=['+254745566505']
+                        )
+                
+        return super().save(*args, **kwargs)
         
   
              
