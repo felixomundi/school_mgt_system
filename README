@@ -18,3 +18,8 @@ venv\scripts\deactivate
 
 git push -u origin main
 
+git clone https://github.com/felixomundi/school_mgt_system .
+
+
+
+

@@ -1,8 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser,BaseUserManager,PermissionsMixin
-from twilio.rest import Client
-from decouple import config
+# from twilio.rest import Client
+# from decouple import config
 
+from django.core.mail import EmailMessage, send_mail
+from django.conf import settings
 
 gender = [
     ("male","male"),
@@ -206,17 +208,24 @@ class AttendanceReport(models.Model):
     def __str__(self):
         return self.student.user.email
     def save(self,*args, **kwargs):        
-        account_sid = config('TWILIO_ACCOUNT_SID')    
-        auth_token = config('TWILIO_AUTH_TOKEN')
-        client = Client(account_sid, auth_token)
-        message = client.messages \
-                        .create(
-                            body=f"Your attendance for {self.attendance.attendance_date}  and {self.attendance.unit.name} was added successfully",
-                            from_='+12764004442',
-                            to=['+254745566505']
-                        )
+        # account_sid = config('TWILIO_ACCOUNT_SID')    
+        # auth_token = config('TWILIO_AUTH_TOKEN')
+        # client = Client(account_sid, auth_token)
+        # message = client.messages \
+        #                 .create(
+        #                     body=f"Your attendance for {self.attendance.attendance_date}  and {self.attendance.unit.name} was added successfully",
+        #                     from_='+12764004442',
+        #                     to=['+254745566505']
+        #                 )
                 
+        # return super().save(*args, **kwargs)
+        subject = 'Record of your attendance'
+        mesagge = f"Your attendance for {self.attendance.unit.name} on {self.attendance.attendance_date} was added successfully"
+        from_email = settings.EMAIL_HOST_USER
+        to_list = ["fomundi34@gmail.com"] 
+        send_mail(subject, mesagge, from_email, to_list, fail_silently=False)
         return super().save(*args, **kwargs)
+        
         
             
 class StudentResult(models.Model):
@@ -236,18 +245,25 @@ class StudentResult(models.Model):
     def total(self):
         return self.unit_assignment_marks + self.unit_exam_marks
     
-    def save(self,*args, **kwargs):        
-        account_sid = config('TWILIO_ACCOUNT_SID')    
-        auth_token = config('TWILIO_AUTH_TOKEN')
-        client = Client(account_sid, auth_token)
-        message = client.messages \
-                        .create(
-                            body=f"Your marks for {self.unit.name} was added successfully",
-                            from_='+12764004442',
-                            to=['+254745566505']
-                        )
+    def save(self, *args, **kwargs):        
+        # account_sid = config('TWILIO_ACCOUNT_SID')    
+        # auth_token = config('TWILIO_AUTH_TOKEN')
+        # client = Client(account_sid, auth_token)
+        # message = client.messages \
+        #                 .create(
+        #                     body=f"Your marks for {self.unit.name} was added successfully",
+        #                     from_='+12764004442',
+        #                     to=['+254745566505']
+        #                 )
                 
+        # return super().save(*args, **kwargs)
+        subject = 'Record of your marks'
+        mesagge = f'Marks for {self.unit.name} was added successfully'
+        from_email = settings.EMAIL_HOST_USER
+        to_list = ["fomundi34@gmail.com"] 
+        send_mail(subject, mesagge, from_email, to_list, fail_silently=False)
         return super().save(*args, **kwargs)
+        
         
   
              

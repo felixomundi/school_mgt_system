@@ -108,10 +108,9 @@ def save_marks(request):
     unitId = data['unit']
     studentId = data['student']
     assignment_marks = data['assignment_marks']
-    exam_marks = data['exam_marks']
-    
+    exam_marks = data['exam_marks']   
     # find StudentById    
-    student = Student.objects.get(user=studentId)
+    student = Student.objects.get(user=studentId) 
     # find unitById
     unit = Unit.objects.get(id=unitId)
     # Check if Students Result Already Exists or not

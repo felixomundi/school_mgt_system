@@ -23,7 +23,7 @@ document.getElementById('postForm').addEventListener("submit", async function (e
             div_data += "<div class='form-group'><div class='row'>";
 
             div_data += "<div class='col-lg-6'>";
-            div_data += "<label>Assignment Marks : </label><input type='number' min='0' max='30' step='0.01' id='assignment_marks'  class='form-control' placeholder='Assignment Marks' />";
+            div_data += "<label>Assignment Marks : </label><input  type='number' min='0' max='30' step='0.01' id='assignment_marks'  class='form-control' placeholder='Assignment Marks' />";
             div_data += "</div>";
 
             div_data += "<div class='col-lg-6'>";
@@ -58,8 +58,7 @@ document.getElementById('postForm').addEventListener("submit", async function (e
         if (!assignment_marks) {
             alert("Add assignment marks");
             return assignment_marks;
-        }
-
+       } 
         var exam_marks = document.getElementById("exam_marks").value;
         if (!exam_marks) {
             alert("Add exam marks");
@@ -97,7 +96,7 @@ document.getElementById('postForm').addEventListener("submit", async function (e
             
         }
     });
-
+   
 
 });
 

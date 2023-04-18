@@ -75,8 +75,8 @@ const csrftoken = getCookie('csrftoken');
   <script src="{% static "js/demo/chart-area-demo.js" %}"></script> {% endcomment %}
 
  {% comment %} <script src="{% static "js/demo/chart-pie-demo.js" %}"></script>  {% endcomment %}
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
+  {% comment %} <script src="https://unpkg.com/axios/dist/axios.min.js"></script> {% endcomment %}
+  <script src="{% static "js/axios.js" %}"></script>
       
 
  <!-- Alertify Javascript -->
